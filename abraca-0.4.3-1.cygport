@@ -1,0 +1,17 @@
+DESCRIPTION="GTK+ XMMS2 client with collections management"
+HOMEPAGE="http://abraca.xmms.se/wiki/abraca"
+SRC_URI="http://abraca.xmms.se/attachments/download/119/${P}.tar.bz2"
+PATCH_URI="0.4.3-asm-pecoff.patch"
+
+src_compile() {
+	check_prog_req python
+
+	lndirs
+	cd ${B}
+	./scons PREFIX=/usr $(echo ${MAKEOPTS} | sed -e 's|.*-j *\([0-9]*\).*|-j\1|')
+}
+
+src_install() {
+	cd ${B}
+	./scons install DESTDIR=${D}
+}

@@ -1,0 +1,6 @@
+category: Audio
+requires: libgcc1 libgdk_pixbuf2.0_0 libglib2.0_0 libgtk2.0_0 libpango1.0_0 libxmmsclient-glib1 libxmmsclient5
+sdesc: "GTK+ XMMS2 client with collections management"
+ldesc: "Abraca is a GTK2 client for the XMMS2 music player. It is 
+designed with collections in mind, which makes managing your music a 
+breeze."
