@@ -1,7 +1,8 @@
 DESCRIPTION="GTK+ XMMS2 client with collections management"
 HOMEPAGE="http://abraca.xmms.se/wiki/abraca"
-SRC_URI="http://abraca.xmms.se/attachments/download/119/${P}.tar.bz2"
-PATCH_URI="0.4.3-asm-pecoff.patch"
+SRC_URI="http://abraca.xmms.se/attachments/download/128/${P}.tar.bz2"
+PATCH_URI="0.5.0-stdio.patch
+           0.5.0-vala08.patch"
 
 src_compile() {
 	check_prog_req python

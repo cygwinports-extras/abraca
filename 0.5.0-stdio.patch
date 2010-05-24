@@ -1,0 +1,15 @@
+--- origsrc/abraca-0.5.0/src/client.vala	2010-04-02 21:19:53.000000000 -0500
++++ src/abraca-0.5.0/src/client.vala	2010-05-24 15:08:23.924720100 -0500
+@@ -145,10 +145,10 @@ namespace Abraca {
+ 				return true;
+ 			}
+ 
+-			string stdout, stderr;
++			string stdOut, stdErr;
+ 
+ 			try {
+-				GLib.Process.spawn_command_line_sync("xmms2-launcher", out stdout, out stderr, null);
++				GLib.Process.spawn_command_line_sync("xmms2-launcher", out stdOut, out stdErr, null);
+ 			} catch (SpawnError e) {
+ 				GLib.warning("Unable to spawn 'xmms2-launcher' (%s)", e.message);
+ 			}
