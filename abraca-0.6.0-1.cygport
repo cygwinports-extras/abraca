@@ -1,8 +1,12 @@
+GIT_URI="git://git.xmms.se/xmms2/${PN}.git"
+GIT_TAG=${PV}
+inherit git
+
 DESCRIPTION="GTK+ XMMS2 client with collections management"
 HOMEPAGE="http://abraca.xmms.se/wiki/abraca"
-SRC_URI="http://abraca.xmms.se/attachments/download/128/${P}.tar.bz2"
+#SRC_URI="http://abraca.xmms.se/attachments/download/128/${P}.tar.bz2"
 PATCH_URI="0.5.0-stdio.patch
-           0.5.0-vala08.patch"
+           0.6.0-vala-0-12.patch"
 
 src_compile() {
 	check_prog_req python
@@ -15,4 +19,6 @@ src_compile() {
 src_install() {
 	cd ${B}
 	./scons install DESTDIR=${D}
+	# some way to shut this off??
+	rm -fr ${D}/usr/*/glade3/
 }
