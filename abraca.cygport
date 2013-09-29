@@ -1,0 +1,28 @@
+NAME="abraca"
+VERSION=0.7.1
+RELEASE=1
+CATEGORY="Audio"
+SUMMARY="GTK+ XMMS2 client with collections management"
+DESCRIPTION="Abraca is a GTK2 client for the XMMS2 music player. It is
+designed with collections in mind, which makes managing your music a breeze."
+HOMEPAGE="http://abraca.github.io/Abraca"
+SRC_URI="https://github.com/downloads/Abraca/Abraca/abraca-${VERSION}.tar.gz"
+PATCH_URI="
+	0.5.0-stdio.patch
+	0.7.1-vala-0-20.patch
+"
+
+src_compile() {
+	check_prog_req python
+
+	lndirs
+	cd ${B}
+	./scons PREFIX=/usr $(echo ${MAKEOPTS} | sed -e 's|.*-j *\([0-9]*\).*|-j\1|')
+}
+
+src_install() {
+	cd ${B}
+	./scons install DESTDIR=${D}
+	# some way to shut this off??
+	rm -fr ${D}/usr/*/glade/
+}

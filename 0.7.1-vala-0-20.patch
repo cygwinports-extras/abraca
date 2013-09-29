@@ -1,0 +1,71 @@
+--- origsrc/abraca-0.7.1/SConstruct	2012-06-17 12:04:56.000000000 -0500
++++ src/abraca-0.7.1/SConstruct	2013-09-29 09:07:19.979821600 -0500
+@@ -5,7 +5,7 @@ env.VariantDir('build', '.')
+ env.Append(VALAPKGPATH = ['vapi'])
+ 
+ conf = env.Configure('build/build-config.h')
+-conf.CheckVala('0.16.0')
++conf.CheckVala('0.20.0')
+ conf.CheckCCompiler()
+ conf.CheckPkgConfig()
+ conf.CheckApp('msgfmt')
+--- origsrc/abraca-0.7.1/src/components/collections/collections_model.vala	2012-06-17 12:04:56.000000000 -0500
++++ src/abraca-0.7.1/src/components/collections/collections_model.vala	2013-09-29 09:05:45.066392900 -0500
+@@ -157,7 +157,7 @@ namespace Abraca {
+ 		 */
+ 		public void remove_temporary_playlist ()
+ 		{
+-			remove(_temporary_playlist_iter);
++			remove(ref _temporary_playlist_iter);
+ 			has_temporary_playlist = false;
+ 		}
+ 
+@@ -201,7 +201,7 @@ namespace Abraca {
+ 				parts = name.split("-", 2);
+ 				if (parts[0] == _("New Playlist")) {
+ 					if (parts[1] != null) {
+-						current = parts[1].to_int();
++						current = int.parse(parts[1]);
+ 					} else {
+ 						current = 0;
+ 					}
+@@ -258,7 +258,7 @@ namespace Abraca {
+ 			}
+ 
+ 			while (iter_children(out child, parent)) {
+-				remove(child);
++				remove(ref child);
+ 			}
+ 
+ 			int pos = iter_n_children(parent);
+@@ -433,7 +433,7 @@ namespace Abraca {
+ 
+ 				get(iter, Column.Name, out current);
+ 				if (name == current) {
+-					remove(iter);
++					remove(ref iter);
+ 					break;
+ 				}
+ 			} while (iter_next(ref iter));
+--- origsrc/abraca-0.7.1/src/components/filter/filter_model.vala	2012-06-17 12:04:56.000000000 -0500
++++ src/abraca-0.7.1/src/components/filter/filter_model.vala	2013-09-29 09:06:57.650544500 -0500
+@@ -117,7 +117,7 @@ namespace Abraca {
+ 		 * When GTK asks for the value of a column, check if the row
+ 		 * has been resolved or not, otherwise resolve it.
+ 		 */
+-		public void get_value (Gtk.TreeIter iter, int column, ref GLib.Value val)
++		public void get_value (Gtk.TreeIter iter, int column, out GLib.Value val)
+ 		{
+ 			GLib.Value tmp1;
+ 
+--- origsrc/abraca-0.7.1/src/components/playlist/playlist_model.vala	2012-06-17 12:04:56.000000000 -0500
++++ src/abraca-0.7.1/src/components/playlist/playlist_model.vala	2013-09-29 09:07:09.612228600 -0500
+@@ -85,7 +85,7 @@ namespace Abraca {
+ 		 * When GTK asks for the value of a column, check if the row
+ 		 * has been resolved or not, otherwise resolve it.
+ 		 */
+-		public void get_value(Gtk.TreeIter iter, int column, ref GLib.Value val) {
++		public void get_value(Gtk.TreeIter iter, int column, out GLib.Value val) {
+ 			GLib.Value status;
+ 
+ 			base.get_value(iter, Column.STATUS, out status);
